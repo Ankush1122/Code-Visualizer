@@ -48,7 +48,7 @@
             min-height: 400px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            margin-bottom: 20px;
+            margin: 20px;
         }
 
         #evaluate {
@@ -60,6 +60,17 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+        }
+
+        .inline-div {
+            display: inline-block;
+            margin-left: 360px;
+        }
+
+        .inline-txtarea {
+            resize: none;
+            border: 2px solid;
+            height: 325px;
         }
     </style>
 </head>
@@ -82,15 +93,26 @@
 
     <form method="POST" action="/execute">
         {% csrf_token %}
-        <textarea id="code" name="code" rows="10" cols="230"></textarea>
+        <textarea id="code" name="code" rows="10" cols="226">{{ code }}</textarea>
         <button type=submit id="evaluate">Evaluate</button>
+
+        <div class="inline-div">
+            <p align="center">User Input</p>
+            <textarea id="input" name="input" cols="50" rows="15" class="inline-txtarea">{{ input }}</textarea>
+        </div>
+        <div class="inline-div">
+            <p align="center">Output</p>
+            {% if error %}
+            <textarea style="color: red;" id="output" name="output" cols="50" rows="15"
+                class="inline-txtarea">{{ output }}</textarea>
+            {% else %}
+            <textarea id="output" name="output" cols="50" rows="15" class="inline-txtarea">{{ output }}</textarea>
+            {% endif %}
+        </div>
     </form>
-    {% if error %}
-    <textarea style="color: red;" id="code" name="code" rows="5" cols="40">{{ output }}</textarea>
-    {% else %}
-    <textarea id="code" name="code" rows="2" cols="40">{{ output }}</textarea>
-    {% endif %}
+
     <div style="height:280px;"></div>
+
     <footer>
         <p>&copy; 2023 Editor. All rights reserved.</p>
     </footer>
