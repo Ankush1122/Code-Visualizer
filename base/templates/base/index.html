@@ -50,7 +50,7 @@
             resize: vertical;
             font-family: monospace;
             line-height: 1.5;
-            margin-left: 128px;
+            margin-left: 330px;
             margin-right: -15px;
             box-sizing: border-box;
         }
@@ -180,15 +180,14 @@
                     </div>
                 </div>
                 <div class="button-container">
-                    <button name="execute" type="submit">Execute</button>
-                    <button name="debug" type="submit">Visualize</button>
+                    <button id = "executebtn" name="execute" class="addMore" title="Execute your python code!" type="submit">Execute</button>
+                    <button id = "debugbtn" name="debug" class="addMore" title="Visualize runtime flow of your python code!" type="submit">Visualize</button>
                 </div>
             </div>
         </div>
 
         <textarea name="input" id="input" class="short_textarea" placeholder="Input Field">{{ input }}</textarea>
         <textarea name="output" id="output" class="short_textarea" placeholder="Output Field">{{ output }}</textarea>
-        <textarea name="debug" id="debug" class="short_textarea" placeholder="Debug Output"></textarea>
     </form>
     <div style="height: 250px;"></div>
     <footer>
@@ -206,6 +205,15 @@
             }
             lineNumberContainer.innerHTML = lineNumberHTML.join('');
         }
+        const deb_button = document.getElementById('debugbtn');
+        const exec_button = document.getElementById('executebtn');
+        
+       
+
+
+        exec_button.addEventListener("click", function() {
+            exec_button.innerText = "Executing...."; 
+        });
 
         editor.addEventListener('input', updateLineNumbers);
 
@@ -228,18 +236,26 @@
         outputs = outputs.replace(/'/g, '"');
         outputs = JSON.parse(outputs);
         var c = 0;
-        let debug_textarea = document.getElementById('debug');
+        let debug_textarea = document.getElementById('output');
         function moveArrowDown() {
             if (c < line_order.length) {
+                deb_button.innerText = "Visualizing....";//Will keep the text as visualising until we are iterating through the output list
                 console.log(line_order);
                 console.log(outputs);
                 topPos = 96 + 9 * line_order[c]; // move the arrow down by 5 pixels
                 arrow.style.top = `${topPos}%`; // update the top position of the arrow
                 if (outputs[c] != "")
-                    debug_textarea.value += outputs[c] + "\n";
+                    debug_textarea.value +=( outputs[c] + "\n");
                 c += 1;
             }
+            else{
+                deb_button.innerText = "Visualize";
+                
+            }
+
+
         }
+
     </script>
 </body>
 
