@@ -82,6 +82,36 @@
             box-sizing: border-box;
         }
 
+        .linenumbers_input {
+            display: inline-block;
+            user-select: none;
+            pointer-events: none;
+            color: #888;
+            width: 40px;
+            padding-right: 10px;
+            text-align: right;
+            position: absolute;
+            left: 292px;
+            top: 974px;
+            bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        .linenumbers_output {
+            display: inline-block;
+            user-select: none;
+            pointer-events: none;
+            color: #888;
+            width: 40px;
+            padding-right: 10px;
+            text-align: right;
+            position: absolute;
+            left: 1090px;
+            top: 974px;
+            bottom: 10px;
+            box-sizing: border-box;
+        }
+
         footer {
             background-color: #333;
             color: #fff;
@@ -180,13 +210,17 @@
                     </div>
                 </div>
                 <div class="button-container">
-                    <button id = "executebtn" name="execute" class="addMore" title="Execute your python code!" type="submit">Execute</button>
-                    <button id = "debugbtn" name="debug" class="addMore" title="Visualize runtime flow of your python code!" type="submit">Visualize</button>
+                    <button id="executebtn" name="execute" class="addMore" title="Execute your python code!"
+                        type="submit">Execute</button>
+                    <button id="debugbtn" name="debug" class="addMore"
+                        title="Visualize runtime flow of your python code!" type="submit">Visualize</button>
                 </div>
             </div>
         </div>
 
+        <div class="linenumbers_input"></div>
         <textarea name="input" id="input" class="short_textarea" placeholder="Input Field">{{ input }}</textarea>
+        <div class="linenumbers_output"></div>
         <textarea name="output" id="output" class="short_textarea" placeholder="Output Field">{{ output }}</textarea>
     </form>
     <div style="height: 250px;"></div>
@@ -194,9 +228,9 @@
         <p>Copyright &copy; 2023</p>
     </footer>
     <script>
+        // For Editor
         const editor = document.getElementById('editor');
         const lineNumberContainer = document.querySelector('.linenumbers');
-
         function updateLineNumbers() {
             const lines = editor.value.split('\n');
             const lineNumberHTML = [];
@@ -205,27 +239,61 @@
             }
             lineNumberContainer.innerHTML = lineNumberHTML.join('');
         }
+        editor.addEventListener('input', updateLineNumbers);
+        updateLineNumbers();
+        editor.addEventListener("keyup", e => {
+            editor.style.height = "63px";
+            let scHeight = e.target.scrollHeight;
+            editor.style.height = `${scHeight}px`;
+        });
+
+        // For Input
+        const input = document.getElementById('input');
+        const lineNumbersInput = document.querySelector('.linenumbers_input');
+        function updateLineNumbersInput() {
+            const lines = input.value.split('\n');
+            const lineNumberHTML = [];
+            for (let i = 1; i <= lines.length; i++) {
+                lineNumberHTML.push('<div class="line">' + i + '</div>');
+            }
+            lineNumbersInput.innerHTML = lineNumberHTML.join('');
+        }
+        input.addEventListener('input', updateLineNumbersInput);
+        updateLineNumbersInput();
+        input.addEventListener("keyup", e => {
+            input.style.height = "63px";
+            let scHeight = e.target.scrollHeight;
+            input.style.height = `${scHeight}px`;
+        });
+
+        // For Output
+        const output = document.getElementById('output');
+        const lineNumbersOutput = document.querySelector('.linenumbers_output');
+        function updateLineNumbersOutput() {
+            const lines = output.value.split('\n');
+            const lineNumberHTML = [];
+            for (let i = 1; i <= lines.length; i++) {
+                lineNumberHTML.push('<div class="line">' + i + '</div>');
+            }
+            lineNumbersOutput.innerHTML = lineNumberHTML.join('');
+        }
+        output.addEventListener('input', updateLineNumbersOutput);
+        updateLineNumbersOutput();
+        output.addEventListener("keyup", e => {
+            output.style.height = "63px";
+            let scHeight = e.target.scrollHeight;
+            output.style.height = `${scHeight}px`;
+        });
+
+
         const deb_button = document.getElementById('debugbtn');
         const exec_button = document.getElementById('executebtn');
-        
-       
 
 
-        exec_button.addEventListener("click", function() {
-            exec_button.innerText = "Executing...."; 
+        exec_button.addEventListener("click", function () {
+            exec_button.innerText = "Executing....";
         });
 
-        editor.addEventListener('input', updateLineNumbers);
-
-        // Call the updateLineNumbers function once when the page loads
-        updateLineNumbers();
-
-        const textarea = document.getElementById("editor");
-        textarea.addEventListener("keyup", e => {
-            textarea.style.height = "63px";
-            let scHeight = e.target.scrollHeight;
-            textarea.style.height = `${scHeight}px`;
-        });
 
         let arrow = document.querySelector(".arrow");
         let topPos = 105; // initial top position
@@ -244,16 +312,16 @@
                 console.log(outputs);
                 topPos = 96 + 9 * line_order[c]; // move the arrow down by 5 pixels
                 arrow.style.top = `${topPos}%`; // update the top position of the arrow
-                if (outputs[c] != "")
-                    debug_textarea.value +=( outputs[c] + "\n");
+                if (outputs[c] != "") {
+                    debug_textarea.value += (outputs[c] + "\n");
+                    updateLineNumbersOutput();
+                }
                 c += 1;
             }
-            else{
+            else {
                 deb_button.innerText = "Visualize";
-                
+
             }
-
-
         }
 
     </script>
