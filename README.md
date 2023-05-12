@@ -1,34 +1,34 @@
+## Code Visualizer:
+- Code Visualizer which visualizes your python code runtime flow and can also be used as online compiler
+
 ## Requirements:
 - Python 3.8
-- Other dependencies in `Pipfile`
+- Other dependencies in `requirement.txt'
+- Linux Operating System
 
-## Steps to setup locally:
-- Install `pipenv` for dependency management
+## Steps to Setup Locally:
+- Install `virtualenv` for dependency management
     ```
-    pip install pipenv
+    pip install virtualenv
     ```
-- Use pipenv to install other dependencies from `Pipfile`
+- Create and Activate virtual environment
     ```
-    pipenv install --dev
+    virtualenv env
     ```
 - Activate the new virtual environment
     ```
-    pipenv shell
+    source env/bin/activate
+    ```   
+- Install Dependencies
     ```
-- Copy .env file
-   ```
-   cp .env.example .env
-   ```
+    pip install -r requirements.txt
+    ```
 - Make database migrations
     ```
-    python manage.py makemigrations
-    python manage.py migrate
-    ```
-- Create a superuser
-    ```
-    python manage.py createsuperuser
+    python3 manage.py makemigrations
+    python3 manage.py migrate
     ```
 - Run development server on localhost
     ```
-    python manage.py runserver :8000
+    python3 manage.py runserver 0.0.0.0:8000
     ```
