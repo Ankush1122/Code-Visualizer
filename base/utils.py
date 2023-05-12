@@ -84,7 +84,7 @@ def debug_code():
         #     else:
         #         temp[var] = out
         # var_values.append(temp)
-
+    print("3")
 
     lines[0] = "(Pdb) "+lines[0]
 
@@ -114,7 +114,7 @@ def debug_code():
 
     outputs = ['']*len(line_order)
     count = 0
-
+    
     for line in lines:
         if ("--Return--" in line):
             break

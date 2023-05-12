@@ -1,4 +1,4 @@
-d = ['2\r', '3']
+d = ['']
 def input():
     try:
         out = d[0]
@@ -8,17 +8,5 @@ def input():
 
     return out 
 
-a = int(input())
-b = int(input())
-
-print(a+b)
-
-x = -1
-for i in range(3):
-    if (i % 3 == 0):
-        x = 0
-    elif (i % 3 == 1):
-        x = 1
-    else:
-        x = 2
-    print(x)
+print("hm")
+print("hm")

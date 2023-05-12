@@ -9,6 +9,7 @@ def home(request):
 
 
 def execute_code(request):
+    print("1")
     if(request.method == "POST"):
         if("execute" in request.POST):
             code = request.POST['editor']
@@ -37,7 +38,7 @@ def execute_code(request):
             except Exception as e:
                 sys.stdout = original_stdout
                 context = {'error':True, 'output':e, 'code':code, 'input':user_input}
-            
+
             print(context)
             return render(request, 'base/index.html', context)
 
@@ -61,6 +62,7 @@ def execute_code(request):
             f.write(s)
             f.write(code)
             f.close()
+            print("2")
             context = debug_code()
             context['line_order'].pop(0)
             context['line_order'].pop(0)
