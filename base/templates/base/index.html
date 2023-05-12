@@ -313,7 +313,7 @@
                 topPos = 96 + 9 * line_order[c]; // move the arrow down by 5 pixels
                 arrow.style.top = `${topPos}%`; // update the top position of the arrow
                 if (outputs[c] != "") {
-                    debug_textarea.value += (outputs[c] + "\n");
+                    debug_textarea.value += ("line " + (line_order[c - 1]) + " : " + outputs[c] + "\n");
                     updateLineNumbersOutput();
                 }
                 c += 1;

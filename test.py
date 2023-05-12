@@ -14,7 +14,7 @@ b = int(input())
 print(a+b)
 
 x = -1
-for i in range(6):
+for i in range(3):
     if (i % 3 == 0):
         x = 0
     elif (i % 3 == 1):
