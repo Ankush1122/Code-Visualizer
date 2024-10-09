@@ -32,3 +32,13 @@
     ```
     python3 manage.py runserver 0.0.0.0:8000
     ```
+
+## Demonstration Screenshots
+
+<p align="center">
+  <img src="Demo/Preview1.png" height="500" width="600"/>
+</p>
+
+<p align="center">
+  <img src="Demo/Preview2.png" height="500" width="600"/>
+</p>
