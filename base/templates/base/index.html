@@ -13,7 +13,7 @@
             margin: 0;
             font-family: Arial, sans-serif;
             font-size: 16px;
-            line-height: 1.125;
+            line-height: 1.25;
         }
 
         header {
@@ -106,7 +106,7 @@
             padding-right: 10px;
             text-align: right;
             position: absolute;
-            left: 1090px;
+            left: 1074px;
             top: 974px;
             bottom: 10px;
             box-sizing: border-box;
@@ -204,17 +204,17 @@
 
             <div class="editor-container">
                 <div class="linenumbers"></div>
-                <div class="row">
-                    <div class="column">
-                        <textarea name="editor" id="editor" placeholder="Code Field">{{ code }}</textarea>
+                    <div class="row">
+                        <div class="column">
+                            <textarea name="editor" id="editor" placeholder="Code Field">{{ code }}</textarea>
+                        </div>
                     </div>
-                </div>
-                <div class="button-container">
-                    <button id="executebtn" name="execute" class="addMore" title="Execute your python code!"
-                        type="submit">Execute</button>
-                    <button id="debugbtn" name="debug" class="addMore"
-                        title="Visualize runtime flow of your python code!" type="submit">Visualize</button>
-                </div>
+                    <div class="button-container">
+                        <button id="executebtn" name="execute" class="addMore" title="Execute your python code!"
+                            type="submit">Execute</button>
+                        <button id="debugbtn" name="debug" class="addMore"
+                            title="Visualize runtime flow of your python code!" type="submit">Visualize</button>
+                    </div>
             </div>
         </div>
 

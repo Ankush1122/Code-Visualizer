@@ -8,5 +8,5 @@ def input():
 
     return out 
 
-print("hm")
-print("hm")
+for i in range(3):
+    print(i)
